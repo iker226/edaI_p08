@@ -47,3 +47,9 @@ bool Dlista_insertar_x_pos(DLista *l, int pos, void *info, size_t size){
     if(pos==0) return Dlista_insertar_inicio(l, info, size);
     
 }
+
+int Dlista_num_nodos(DLista*l){
+    int i=0;
+    for(Nodo*tmp = l->head; tmp!=NULL; tmp=tmp->sig, i++);
+    return i;
+}
