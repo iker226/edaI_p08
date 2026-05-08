@@ -42,18 +42,13 @@ bool Dlista_insertar_fin(DLista *l, void *info, size_t size){
 }
 
 bool Dlista_insertar_x_pos(Dlista *l, int pos, void *info, size_t size){
-
     if(!l) return false;
-
     if(Dlista_es_vacia(l))
         return Dlista_insertar_vacia(l, info, size);
-
     if(pos==0)
         return Dlista_insertar_inicio(l, info, size);
-
     int i=0;
     Nodo *tmp = l->head;
-
     while(tmp!=NULL && i<pos){
         tmp = tmp->sig;
         i++;
