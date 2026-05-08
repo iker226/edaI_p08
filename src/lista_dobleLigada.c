@@ -41,11 +41,32 @@ bool Dlista_insertar_fin(DLista *l, void *info, size_t size){
     return true;
 }
 
-bool Dlista_insertar_x_pos(DLista *l, int pos, void *info, size_t size){
+bool Dlista_insertar_x_pos(Dlista *l, int pos, void *info, size_t size){
+
     if(!l) return false;
-    if(Dlista_es_vacia(l)) return Dlista_insertar_vacia(l, info, size);
-    if(pos==0) return Dlista_insertar_inicio(l, info, size);
-    
+
+    if(Dlista_es_vacia(l))
+        return Dlista_insertar_vacia(l, info, size);
+
+    if(pos==0)
+        return Dlista_insertar_inicio(l, info, size);
+
+    int i=0;
+    Nodo *tmp = l->head;
+
+    while(tmp!=NULL && i<pos){
+        tmp = tmp->sig;
+        i++;
+    }
+    if(tmp==NULL)
+        return Dlista_insertar_fin(l, info, size);
+    Nodo *n = nodo_crear(info, size);
+    if(!n) return false;
+    n->sig = tmp;
+    n->ant = tmp->ant;
+    tmp->ant->sig = n;
+    tmp->ant = n;
+    return true;
 }
 
 int Dlista_num_nodos(DLista*l){
